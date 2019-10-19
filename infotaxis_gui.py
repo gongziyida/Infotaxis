@@ -11,8 +11,17 @@ import infotaxis as itx
 
 np.set_printoptions(precision=2)
 
+
 class InfotaxisRealTime(QtGui.QWidget):
     def __init__(self, infotaxis, freq=0.01):
+        """
+        Parameters
+        ----------
+        infotaxis: infotaxis.infotaxis
+            An infotaxis object, the "searcher"
+        freq: float, optional
+            The refreshing frequency for the animation
+        """
         super().__init__()
 
         # the simulation module
@@ -28,15 +37,15 @@ class InfotaxisRealTime(QtGui.QWidget):
 
         # Outer grid layout
         self.layout = QtGui.QGridLayout()
-        
-        self._make()
 
+        self._make()
 
     def _make(self):
         # Make the environment widget
         self.env_widget = pg.PlotWidget()
         self.env_widget.hideAxis('left')
         self.env_widget.hideAxis('bottom')
+
         # Data
         src_pos, src_radius = self.infotaxis.src
         self.prob_map = self.infotaxis.prob_map
@@ -54,14 +63,14 @@ class InfotaxisRealTime(QtGui.QWidget):
         self.prob_map_heat = pg.ImageItem()
         self.env_widget.addItem(self.prob_map_heat)
         self.prob_map_heat.setImage(self.prob_map)
-        
+
         # Locate the actual source position
-        self.src = pg.ScatterPlotItem(pxMode=False, size=src_radius*2)
+        self.src = pg.ScatterPlotItem(pxMode=False, size=src_radius * 2)
         self.env_widget.addItem(self.src)
         self.src.setData(pos=np.array([src_pos]))
 
         txt = 'Dimension: {}\tWind: {}\nParticle Lifetime: {:.1f} s\t' + \
-                'Diffusivity: {:.1f} m^2/s\tEmission Rate {:.1f} Hz'
+              'Diffusivity: {:.1f} m^2/s\tEmission Rate {:.1f} Hz'
         self.winddir = pg.TextItem(text=txt.format(dim, v, tau, d, r))
         self.env_widget.addItem(self.winddir)
 
@@ -72,19 +81,21 @@ class InfotaxisRealTime(QtGui.QWidget):
 
         # hits
         self.hits = pg.ScatterPlotItem()
-        self.hits.setBrush(50,0,0)
+        self.hits.setBrush(50, 0, 0)
         self.env_widget.addItem(self.hits)
 
         # Searcher
-        self.searcher = pg.ScatterPlotItem(pxMode=False, size=searcher_size*2)
+        self.searcher = pg.ScatterPlotItem(pxMode=False, size=searcher_size * 2)
         self.searcher.setBrush(255, 0, 0)
         self.env_widget.addItem(self.searcher)
         self.searcher.setData(pos=self.searcher_pos)
 
         self.layout.addWidget(self.env_widget)
 
-
     def start(self):
+        """
+        To start the simulation
+        """
         # Read in data using a thread
         self.update_thread = Thread(target=self.read_pos, args=())
         self.update_thread.daemon = True
@@ -94,12 +105,9 @@ class InfotaxisRealTime(QtGui.QWidget):
         self.update_timer.timeout.connect(self.plot_updater)
         self.update_timer.start(self.TIMER_FREQUENCY)
 
-  
-
-
     def read_pos(self):
         frequency = self.FREQUENCY
-        time.sleep(0.3) # Make sure the initial step is visible
+        time.sleep(0.3)  # Make sure the initial step is visible
         while True:
             # sleep
             time.sleep(frequency)
@@ -116,7 +124,6 @@ class InfotaxisRealTime(QtGui.QWidget):
             # update probability map
             self.prob_map = self.infotaxis.prob_map[::-1]
 
-
     def plot_updater(self):
         self.trajectory.setData(x=self.hist_pos[:, 0], y=self.hist_pos[:, 1])
         self.hits.setData(pos=self.hist_pos[self.hits_record])
@@ -124,6 +131,9 @@ class InfotaxisRealTime(QtGui.QWidget):
         self.prob_map_heat.setImage(self.prob_map)
 
 
+"""
+An example of how to make the animation
+"""
 if __name__ == '__main__':
     # Create main application window
     app = QtGui.QApplication([])
@@ -133,7 +143,7 @@ if __name__ == '__main__':
 
     # Create an infotaxis instance
     infotaxis_example = itx.Infotaxis(
-        d=2, r=100, a=1, v=0.5, winddir=3*np.pi/2, tau=500, dt=0.1, dim=3, 
+        d=2, r=100, a=1, v=0.5, winddir=3 * np.pi / 2, tau=500, dt=0.1, dim=3,
         pos=np.zeros(2), src_pos=np.full(2, 90), src_radius=2, window=100)
 
     # Make a GUI
@@ -147,13 +157,11 @@ if __name__ == '__main__':
     cw.setLayout(ml)
     mw.setCentralWidget(cw)
 
-
     # Can use either to add plot to main layout
-    ml.addLayout(infotaxis_real_time.layout,0,0)
+    ml.addLayout(infotaxis_real_time.layout, 0, 0)
     mw.show()
     infotaxis_real_time.start()
 
     # Start Qt event loop unless running in interactive mode or using pyside
     if (sys.flags.interactive != 1) or not hasattr(QtCore, 'PYQT_VERSION'):
         QtGui.QApplication.instance().exec_()
-

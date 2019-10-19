@@ -1,7 +1,3 @@
-""" Thanks @nathancy on StackOverflow
-    Website: 
-    stackoverflow.com/questions/56486710/animate-pyqtgraph-in-class?rq=1
-"""
 from pyqtgraph.Qt import QtCore, QtGui
 from threading import Thread
 import pyqtgraph as pg

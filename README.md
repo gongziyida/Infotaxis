@@ -3,6 +3,8 @@ This is an implementation of infotaxis based on the paper [*‘Infotaxis’ as a
 
 This implementation includes 2D and 3D versions of infotaxis, allows wind to blow in an aribitrary direction, and enables the searcher to move in eight directions instead of four.
 
+`infotaxis_gui.py` contains an integrated GUI example and can be directly run with Python 3. Please note that [PyQtGraph](https://pypi.org/project/pyqtgraph/) and [PyQt5](https://pypi.org/project/PyQt5/) should be installed.
+
 Some examples:
 
 <img src="/finding.png" alt="A searcher is finding the source" width="400"/> <img src="/found.png" alt="A searcher has found the source" width="400"/>

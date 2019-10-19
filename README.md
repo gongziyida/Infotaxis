@@ -7,4 +7,6 @@ Some examples:
 
 <img src="/finding.png" alt="A searcher is finding the source" width="400"/> <img src="/found.png" alt="A searcher has found the source" width="400"/>
 
-The moving red dot is the searcher and the big blue dot (whose size varies with source radius) is the source. Brightness in the background indicates the magnitudes of probabilities that the source is at those corresponding locations. White line is the trajectory and dark-red dots on the line are places where the searcher gets patches.
+The moving red dot is the searcher and the big blue dot is the source. Brightness in the background indicates the magnitudes of probabilities that the source is at those corresponding locations. White line is the trajectory and dark-red dots on the line are places where the searcher gets patches.
+
+The sizes of the red dot (searcher) and big blue dot (source) vary according to the radius of the searcher and source, respectively. It is assumed that the searcher's "body" is soft, i.e. part of the dot can exceed the window as long as its center is within the window.

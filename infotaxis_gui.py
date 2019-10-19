@@ -1,3 +1,6 @@
+"""
+Author: Ziyi Gong
+"""
 from pyqtgraph.Qt import QtCore, QtGui
 from threading import Thread
 import pyqtgraph as pg

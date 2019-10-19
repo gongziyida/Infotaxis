@@ -1,3 +1,7 @@
+"""
+Author: Ziyi Gong
+"""
+
 import numpy as np
 from scipy.special import k0
 from itertools import product

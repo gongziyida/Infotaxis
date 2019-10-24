@@ -60,7 +60,8 @@ class Infotaxis:
         else:
             raise ValueError('Unsupported dimension')
 
-        self._v = np.array([np.cos(winddir), np.sin(winddir)]) * v  # Vectorize
+        self._v = np.array([-np.sin(winddir), np.cos(winddir)]) * v  # Vectorize
+        self._v[self._v < 1e-5] = 0
 
         self._pos = self.xy2ij(pos)
 
@@ -137,6 +138,10 @@ class Infotaxis:
     @property
     def prob_map(self):
         return self._prob_map
+
+    @property
+    def wind(self):
+        return (self._v[1], -self._v[0])
 
     def concentration_map(self):
         """

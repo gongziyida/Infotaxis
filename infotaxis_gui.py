@@ -57,7 +57,7 @@ class InfotaxisRealTime(QtGui.QWidget):
         self.hist_pos = self.searcher_pos.copy()
         self.hits_record = [False]
         dim = self.infotaxis._dim
-        v = self.infotaxis._v
+        v = self.infotaxis.wind
         tau = float(self.infotaxis._tau)
         d = float(self.infotaxis._d)
         r = float(self.infotaxis._r)
@@ -147,7 +147,7 @@ if __name__ == '__main__':
     # Create an infotaxis instance
     infotaxis_example = itx.Infotaxis(
         d=2, r=100, a=1, v=0.5, winddir=3 * np.pi / 2, tau=500, dt=0.1, dim=3,
-        pos=np.zeros(2), src_pos=np.full(2, 90), src_radius=2, window=100)
+        pos=np.array([0., 0.]), src_pos=np.full(2, 90), src_radius=2, window=100)
 
     # Make a GUI
     infotaxis_real_time = InfotaxisRealTime(infotaxis_example)

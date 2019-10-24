@@ -12,4 +12,5 @@ The sizes of the red dot (searcher) and big blue dot (source) vary according to 
 
 ## Some Examples
 Finding the source (left) and found the source (right)
+
 <img src="finding.png" width="400"> <img src="found.png" width="400">

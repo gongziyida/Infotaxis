@@ -5,10 +5,7 @@ This implementation includes 2D and 3D versions of infotaxis, allows wind to blo
 
 `infotaxis_gui.py` contains an integrated GUI example and can be directly run with Python 3. Please note that [PyQtGraph](https://pypi.org/project/pyqtgraph/) and [PyQt5](https://pypi.org/project/PyQt5/) should be installed.
 
-Some examples:
-
-<img src="/finding.png" alt="A searcher is finding the source" width="400"/> <img src="/found.png" alt="A searcher has found the source" width="400"/>
-
+## Notations
 The moving red dot is the searcher and the big blue dot is the source. Brightness in the background indicates the magnitudes of probabilities that the source is at those corresponding locations. White line is the trajectory and dark-red dots on the line are places where the searcher gets patches.
 
 The sizes of the red dot (searcher) and big blue dot (source) vary according to the radius of the searcher and source, respectively. It is assumed that the searcher's "body" is soft, i.e. part of the dot can exceed the window as long as its center is within the window.

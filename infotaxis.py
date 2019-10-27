@@ -120,12 +120,12 @@ class Infotaxis:
 
     def adjacent(self, a):
         if a == 0:
-            return (1, 2)
+            return 1, 2
         elif a == self._window - 1:
-            return (0, 1)
+            return 0, 1
         else:
-            assert (a > 0 and a < self._window)
-            return (0, 1, 2)
+            assert (0 < a < self._window)
+            return 0, 1, 2
 
     @property
     def cur(self):
@@ -141,7 +141,7 @@ class Infotaxis:
 
     @property
     def wind(self):
-        return (self._v[1], -self._v[0])
+        return self._v[1], -self._v[0]
 
     def concentration_map(self):
         """
@@ -230,7 +230,7 @@ class Infotaxis:
             Whether the searcher gets patches or not
         """
         # Check if source has been found
-        if np.linalg.norm(self._pos - self._src_pos) < self._a + self._src_radius:
+        if np.linalg.norm(self._pos - self._src_pos) < self._src_radius:
             return -1
 
         # Clear
@@ -279,7 +279,7 @@ class Infotaxis:
         self._pos[1] += argmin[1] - 1
 
         # Check if source has been found
-        if np.linalg.norm(self._pos - self._src_pos) < self._a + self._src_radius:
+        if np.linalg.norm(self._pos - self._src_pos) < self._src_radius:
             self._prob_map[:, :] = 0
             return -1
 

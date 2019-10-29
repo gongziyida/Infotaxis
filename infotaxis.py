@@ -61,7 +61,7 @@ class Infotaxis:
             raise ValueError('Unsupported dimension')
 
         self._v = np.array([-np.sin(winddir), np.cos(winddir)]) * v  # Vectorize
-        self._v[self._v < 1e-5] = 0
+        self._v[np.abs(self._v) < 1e-5] = 0
 
         self._pos = self.xy2ij(pos)
 
@@ -181,7 +181,7 @@ class Infotaxis:
 		Update the posterior probability distribution 
 		P(src_pos|trajectory(t))
 			= normalize(P(src_pos | trajectory(t-1)) * P(hits(self._pos(t)) | src_pos))
-		Patameters
+		Parameters
 		----------
 		hit_rates: numpy.ndarray
 		    The hit rates for all possible source locations

@@ -12,7 +12,7 @@ import os
 
 import infotaxis as itx
 
-np.set_printoptions(precision=2)
+np.set_printoptions(precision=3)
 
 
 class InfotaxisRealTime(QtGui.QWidget):
@@ -146,7 +146,7 @@ if __name__ == '__main__':
 
     # Create an infotaxis instance
     infotaxis_example = itx.Infotaxis(
-        d=2, r=100, a=1, v=0.5, winddir=3 * np.pi / 2, tau=500, dt=0.1, dim=3,
+        d=2, r=100, a=1, v=0.5, winddir=2 * np.pi / 2, tau=500, dt=0.1, dim=3,
         pos=np.array([0., 0.]), src_pos=np.full(2, 90), src_radius=2, window=100)
 
     # Make a GUI
